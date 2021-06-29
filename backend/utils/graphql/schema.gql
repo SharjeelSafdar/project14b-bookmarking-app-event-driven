@@ -1,0 +1,38 @@
+type Bookmark {
+  id: ID!
+  title: String!
+  url: String!
+}
+
+input BookmarkInput {
+  id: ID!
+  title: String!
+  url: String!
+}
+
+type MutationCompletedReturnType {
+  mutationType: String!
+  username: String!
+  bookmark: Bookmark!
+}
+
+type Query {
+  bookmarks: [Bookmark!]!
+}
+
+type Mutation {
+  createBookmark(title: String!, url: String!): String!
+  editBookmark(id: ID!, title: String!, url: String!): String!
+  deleteBookmark(id: ID!): String!
+  batchDeleteBookmarks(ids: [ID!]!): String!
+  mutationCompleted(
+    mutationType: String!
+    username: String!
+    bookmark: BookmarkInput!
+  ): MutationCompletedReturnType!
+}
+
+type Subscription {
+  onMutationCompleted(username: String): MutationCompletedReturnType
+    @aws_subscribe(mutations: ["mutationCompleted"])
+}
