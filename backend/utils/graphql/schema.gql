@@ -12,7 +12,6 @@ input BookmarkInput {
 
 type MutationCompletedReturnType {
   mutationType: String!
-  username: String!
   bookmark: Bookmark!
 }
 
@@ -27,7 +26,6 @@ type Mutation {
   batchDeleteBookmarks(ids: [ID!]!): String!
   mutationCompleted(
     mutationType: String!
-    username: String!
     bookmark: BookmarkInput!
   ): MutationCompletedReturnType!
 }
