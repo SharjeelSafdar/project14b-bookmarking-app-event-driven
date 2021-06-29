@@ -8,9 +8,9 @@ export const batchDeleteBookmarks = async (
   ids: string[]
 ) => {
   try {
-    ids.forEach(async id => {
-      await deleteBookmark(ddbClient, TableName, id);
-    });
+    for (var i = 0; i < ids.length; ++i) {
+      await deleteBookmark(ddbClient, TableName, ids[i]);
+    }
     console.log("Bookmarks Deleted in Batch");
   } catch (error) {
     console.log("Error deleting bookmarks in batch: ", error);

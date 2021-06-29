@@ -47,11 +47,12 @@ export const handler = async (event: EventType) => {
       break;
     }
     case Mutations.BATCH_DELETE_BOOKMARKS: {
-      await batchDeleteBookmarks(
-        ddbClient,
-        BOOKMARKS_TABLE_NAME,
-        event.detail.ids
-      );
+      const parsedIds = event.detail.ids
+        .slice(1, -1)
+        .split(",")
+        .map((id, ind) => (ind === 0 ? id : id.slice(1)));
+      console.log("parsedIds: ", parsedIds);
+      await batchDeleteBookmarks(ddbClient, BOOKMARKS_TABLE_NAME, parsedIds);
       break;
     }
     default: {

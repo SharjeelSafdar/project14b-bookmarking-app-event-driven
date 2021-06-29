@@ -12,25 +12,25 @@ export type DetailType =
       id: never;
       title: string;
       url: string;
-      ids: string[];
+      ids: never;
     }
   | {
       id: string;
       title: string;
       url: string;
-      ids: string[];
+      ids: never;
     }
   | {
       id: string;
       title: never;
       url: never;
-      ids: string[];
+      ids: never;
     }
   | {
       id: never;
       title: never;
       url: never;
-      ids: string[];
+      ids: string;
     };
 
 export type EventType = EventBridgeEvent<Mutations, DetailType>;
