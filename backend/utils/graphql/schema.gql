@@ -33,6 +33,6 @@ type Mutation {
 }
 
 type Subscription {
-  onMutationCompleted(username: String): MutationCompletedReturnType
+  onMutationCompleted: MutationCompletedReturnType
     @aws_subscribe(mutations: ["mutationCompleted"])
 }
