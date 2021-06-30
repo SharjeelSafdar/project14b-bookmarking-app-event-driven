@@ -9,7 +9,7 @@
 
 ## Link to Web App
 
-A serverless JAMstack Bookmarking App with Gatsby, TypeScript, AppSync, DynamoDB, Lambda, CloudFront, and EventBridge. The web app has been deployed to AWS CloudFront, and can be accessed [here](d3upvsnwdc4gy5.cloudfront.net).
+A serverless JAMstack Bookmarking App with Gatsby, TypeScript, AppSync, DynamoDB, Lambda, CloudFront, and EventBridge. The web app has been deployed to AWS CloudFront, and can be accessed [here](https://d3upvsnwdc4gy5.cloudfront.net).
 
 ## Frontend
 
