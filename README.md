@@ -9,7 +9,7 @@
 
 ## Link to Web App
 
-The web app has been deployed to AWS CloudFront, and can be accessed [here](https://dw53lvip47mcd.cloudfront.net/).
+A serverless JAMstack Todo App with Gatsby, TypeScript, AppSync, DynamoDB, Lambda, CloudFront, and EventBridge. The web app has been deployed to AWS CloudFront, and can be accessed [here](#).
 
 ## Frontend
 
@@ -21,6 +21,11 @@ The following are some of the features of this project:
 - A GraphQL API with [AWS AppSync](https://aws.amazon.com/appsync/) to interact with DynamoDB
 - Demonstrates CRUD operations using DynamoDB through the GraphQL API
 - Bookmarks are updated in real-time on any instance of web app with the help of AppSync subscriptions
+- The AppSync queries are performed synchronously with a DynamoDB data source.
+- The AppSync mutations are performed assynchronously. An HTTP data source simply puts the information about the mutation on [EventBridge](https://aws.amazon.com/eventbridge/) default bus.
+- EventBridge invokes a [Lambda](https://aws.amazon.com/lambda/) function which performs the actual mutation on the DynamoDB Table with the help of `aws-sdk`.
+- DynamoDB Streams are also enabled for our table. Any change in the table invokes another Lambda function which calls a mutation on AppSync called `mutationCompleted`.
+- The client listens for this mutation with an AppSync subscription called `onMutationCompleted` and updates the UI.
 - Uses [Amplify](https://amplify.com/) for GraphQL queries and mutations on client side
 - Bootstrapped with [GatsbyJS](https://www.gatsbyjs.com/)
 - Additionally, includes TypeScript support for gatsby-config, gatsby-node, gatsby-browser and gatsby-ssr files
@@ -31,18 +36,21 @@ The following are some of the features of this project:
 
 ## Backend
 
-This AWS CDK App deploys the backend infrastructure for [Project 13B](https://github.com/SharjeelSafdar/project13b-bookmarking-app-with-aws). The app consists of two stacks.
+This AWS CDK App deploys the backend infrastructure for Project 14B. The app consists of two stacks.
 
-### Stack 1: AppSync GraphQL API and DynamoDB Table
+### Stack 1: AppSync GraphQL API, DynamoDB Table, EventBridge and Lambda Functions
 
 It contanis of the AWS services used by the web client. It has the following constructs:
 
 - A DynamoDB Table to contain the bookmarks saved by the users
-- An AppSync GraphQL API (with real-time subscriptions) to access the bookmarks in the Table
+- An AppSync GraphQL API to access the bookmarks in the Table
+- A Lamba function to perform the actual mutation on the DynamoDB table
+- An EventBridge rule to invoke this function when a mutation is performed by the client side
+- Another Lambda function to call an AppSync mutation to inform the client side about the changes in table through an AppSync subscription
 
 ### Stack 2: CloudFront Distribution and S3 Bucket
 
 It contains the infrastructure to deploy frontend client. It has the following constructs:
 
-- A S3 Bucket with public access to store the static assets of Gatsby web app
+- A [S3](https://aws.amazon.com/s3/) Bucket with public access to store the static assets of Gatsby web app
 - A Cloud Front Distribution to serve the static assets through a CDN. It also has the error handling capability: redirects any `404s` to `/404.html`.
