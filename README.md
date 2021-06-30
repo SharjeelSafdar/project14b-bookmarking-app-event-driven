@@ -9,7 +9,7 @@
 
 ## Link to Web App
 
-A serverless JAMstack Todo App with Gatsby, TypeScript, AppSync, DynamoDB, Lambda, CloudFront, and EventBridge. The web app has been deployed to AWS CloudFront, and can be accessed [here](#).
+A serverless JAMstack Bookmarking App with Gatsby, TypeScript, AppSync, DynamoDB, Lambda, CloudFront, and EventBridge. The web app has been deployed to AWS CloudFront, and can be accessed [here](#).
 
 ## Frontend
 
