@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-  Project 14B: Serverless JAMstack Bookmarking App with with Event-Driven Architecture
+  Project 14B: Serverless JAMstack Bookmarking App with Event-Driven Architecture
 </h1>
 
 ## Link to Web App
